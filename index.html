@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="build" content="2.0">
+<meta name="build" content="2.1">
 <title>The Hand Mirror | Mot Buchanan</title>
 <meta name="description" content="One phone selfie, turned into a full editorial library. Claude did the thinking, Grok made the pictures, I did the deciding.">
 <meta property="og:title" content="The Hand Mirror - Mot Buchanan">
@@ -84,14 +84,14 @@ section.blk{padding:76px 0;border-top:1px solid var(--line)}
 
 /* timeline */
 .days{margin-top:34px}
-.day{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
+.day{padding:24px 0;border-top:1px solid var(--line)}
 .day:last-child{border-bottom:1px solid var(--line)}
-.day .d{font-family:var(--mono);font-size:12px;color:var(--teal);padding-top:4px;line-height:1.35}
+.day .d{font-family:var(--mono);font-size:12px;color:var(--teal);line-height:1.35;display:block;margin-bottom:10px}
 .day h3{font-size:22px;margin:0 0 7px}
 .day p{margin:0;color:var(--ink-2);font-weight:300;max-width:62ch}
-.day .thumb{margin-top:15px;width:140px;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
+.day .thumb{margin-top:16px;width:150px;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
 .day .thumb img{aspect-ratio:4/5;object-fit:cover}
-@media(min-width:900px){.day{grid-template-columns:140px 1fr 180px;align-items:start}.day .thumb{margin-top:0;width:180px}}
+@media(min-width:900px){.day{display:grid;grid-template-columns:140px 1fr 180px;gap:18px;align-items:start}.day .d{margin-bottom:0;padding-top:4px}.day .thumb{margin-top:0;width:180px}}
 
 /* prompt anatomy */
 .anat{display:grid;gap:18px;margin-top:30px}
@@ -413,11 +413,11 @@ footer{padding:28px 0 76px;border-top:1px solid var(--line);font-family:var(--mo
 </section>
 
 <footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto">
-  <span>Mot Buchanan &middot; The Hand Mirror</span><span>v2.0 &middot; Oct 1 2026</span>
+  <span>Mot Buchanan &middot; The Hand Mirror</span><span>v2.1 &middot; Oct 1 2026</span>
 </div></footer>
 
-<button class="mb-ver" id="ver">v2.0</button>
-<div class="toast" id="toast">v2.0 loaded &middot; Oct 1 2026</div>
+<button class="mb-ver" id="ver">v2.1</button>
+<div class="toast" id="toast">v2.1 loaded &middot; Oct 1 2026</div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button id="lbx">close</button>
