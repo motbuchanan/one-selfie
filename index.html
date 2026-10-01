@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="build" content="2.1">
+<meta name="build" content="3.0">
 <title>The Hand Mirror | Mot Buchanan</title>
-<meta name="description" content="One phone selfie, turned into a full editorial library. Claude did the thinking, Grok made the pictures, I did the deciding.">
+<meta name="description" content="One phone selfie, turned into a full library of myself in places I have never stood. Claude did the thinking, Grok made the pictures, I did the deciding.">
 <meta property="og:title" content="The Hand Mirror - Mot Buchanan">
 <meta property="og:description" content="One selfie from my living room became a wardrobe I don't own. Here is exactly how.">
 <meta property="og:type" content="website">
@@ -14,15 +14,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ground:#0d0e10;
-  --ground-2:#15171a;
-  --ground-3:#1c1f23;
-  --panel:#1a1d21;
+  --ground:#0c0d0f;
+  --ground-2:#131518;
+  --ground-3:#1b1e22;
   --line:#2b2f35;
   --line-2:#3a3f47;
-  --ink:#ece6da;
+  --ink:#eee8dc;
   --ink-2:#a6a59c;
-  --mute:#6f7177;
+  --mute:#74767c;
   --teal:#34b6a6;
   --teal-2:#63d6c6;
   --teal-ink:#06231f;
@@ -33,70 +32,74 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0}
+html{scroll-behavior:smooth}
 body{background:var(--ground);color:var(--ink);font-family:var(--ui);font-size:17px;line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
-.wrap{max-width:1200px;margin:0 auto;padding:0 22px}
-.lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
-.lab.a{color:var(--amber)}
-.lab.m{color:var(--mute)}
+h1,h2,h3,h4{font-weight:800;letter-spacing:-.025em;line-height:1;margin:0}
+.bleed{position:relative;width:100vw;left:50%;transform:translateX(-50%)}
+.hold{max-width:720px;margin:0 auto;padding:0 24px}
+.lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+.lab.a{color:var(--amber-2)}
 .am{color:var(--amber-2)}
-h1,h2,h3,h4{font-weight:800;letter-spacing:-.025em;line-height:.98;margin:0}
 
-/* chrome: matches the Closet shell */
-.home{position:fixed;top:14px;left:14px;z-index:40;font-family:var(--mono);font-size:12px;padding:8px 15px;border-radius:999px;background:var(--teal);color:var(--teal-ink);text-decoration:none;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.35)}
-.mb-ver{position:fixed;right:14px;bottom:14px;z-index:40;font-family:var(--mono);font-size:11px;padding:7px 12px;border-radius:999px;background:rgba(21,23,26,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);color:var(--ink-2);cursor:pointer}
+/* film grain + vignette for atmosphere */
+body::before{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* chrome */
+.home{position:fixed;top:14px;left:14px;z-index:40;font-family:var(--mono);font-size:12px;padding:8px 15px;border-radius:999px;background:var(--teal);color:var(--teal-ink);text-decoration:none;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.mb-ver{position:fixed;right:14px;bottom:14px;z-index:40;font-family:var(--mono);font-size:11px;padding:7px 12px;border-radius:999px;background:rgba(19,21,24,.74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);color:var(--ink-2);cursor:pointer}
 .toast{position:fixed;right:14px;bottom:52px;z-index:41;font-family:var(--mono);font-size:12px;background:var(--teal);color:var(--teal-ink);padding:8px 13px;border-radius:10px;opacity:0;transform:translateY(6px);transition:.25s;pointer-events:none;font-weight:500}
 .toast.on{opacity:1;transform:none}
 
-/* hero: asymmetric */
-.hero{position:relative;padding:92px 0 54px}
-.hero-grid{display:grid;gap:30px}
-.frame{position:relative;max-width:430px;border-radius:5px;overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.6)}
-.frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(236,230,218,.08);border-radius:5px;pointer-events:none}
-.frame img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 28%;animation:rise 1s cubic-bezier(.6,0,.2,1) .1s both}
-@keyframes rise{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
-.frame-tag{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 13px;background:linear-gradient(transparent,rgba(5,6,7,.9));display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink)}
-.hero h1{font-size:clamp(46px,9vw,112px);margin:16px 0 20px}
-.hero p.lede{font-size:clamp(18px,2.3vw,23px);color:var(--ink-2);max-width:33ch;margin:0;font-weight:300}
+/* image band: sharp portrait on its own blurred backdrop */
+.band{min-height:90svh;display:grid;place-items:center;overflow:hidden;background:#000;position:relative}
+.band .bg{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(40px) brightness(.38) saturate(1.15);transform:scale(1.12)}
+.band .fg{position:relative;max-height:90svh;width:auto;max-width:94vw;box-shadow:0 36px 90px rgba(0,0,0,.62)}
+.band .cap{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:60px 24px 26px;background:linear-gradient(transparent,rgba(5,6,7,.82));pointer-events:none}
+.band .cap .d{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--teal-2);display:block;margin-bottom:8px}
+.band .cap .t{font-size:clamp(21px,3.2vw,30px);font-weight:700;letter-spacing:-.02em;max-width:22ch;margin:0 auto;color:#fff;text-align:center}
+.band .cap .t .am{color:var(--amber-2)}
+
+/* HERO */
+.hero{min-height:94svh;display:grid;place-items:end center;overflow:hidden;position:relative;text-align:center}
+.hero .bg{position:absolute;inset:0;background-size:cover;background-position:center 26%}
+.hero .scrim{position:absolute;inset:0;background:linear-gradient(rgba(10,11,13,.46) 0%,rgba(10,11,13,.1) 32%,rgba(10,11,13,.72) 78%,var(--ground) 100%)}
+.hero .inner{position:relative;z-index:3;padding:0 22px 50px;max-width:900px}
+.hero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-2);margin-bottom:18px}
+.hero h1{font-size:clamp(44px,10vw,104px);font-weight:900;color:#fff}
+.hero h1 .am{color:var(--amber-2)}
+.hero .tag{margin-top:18px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:rgba(238,232,220,.7)}
+.hero .cue{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(238,232,220,.6);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+
+/* text interlude (earned whitespace) */
+.say{padding:72px 0}
+.say p{font-size:clamp(21px,3.4vw,30px);line-height:1.35;font-weight:300;color:var(--ink);margin:0;letter-spacing:-.01em}
+.say p .am{color:var(--amber-2);font-weight:400}
+.overline{padding:64px 0 0}
+.overline h2{font-size:clamp(28px,5vw,46px);font-weight:800;margin:12px 0 0}
+.overline h2 .am{color:var(--amber-2)}
+.overline p{color:var(--ink-2);font-weight:300;margin:14px 0 0;font-size:18px}
 .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
 .facts span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--ink-2)}
 .facts span b{color:var(--teal-2);font-weight:500}
-@media(min-width:900px){.hero-grid{grid-template-columns:430px 1fr;align-items:end;gap:58px}}
 
-section.blk{padding:76px 0;border-top:1px solid var(--line)}
-.h2{font-size:clamp(33px,5.6vw,60px);margin:12px 0 20px}
-.copy{max-width:60ch;color:var(--ink-2);font-weight:300;font-size:18px}
-.copy p{margin:0 0 15px}
-.copy strong{color:var(--ink);font-weight:600}
-
-/* compare slider: the recurring signature interaction */
-.cmp{position:relative;width:100%;max-width:520px;aspect-ratio:4/5;border-radius:5px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:pan-y;background:#000;cursor:ew-resize}
+/* compare slider band */
+.cmpwrap{padding:34px 0 10px;display:grid;place-items:center}
+.cmp{position:relative;width:min(94vw,560px);aspect-ratio:4/5;border-radius:5px;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:pan-y;background:#000;cursor:ew-resize;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .cmp .top{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
-.cmp .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;margin-left:-1px;background:var(--teal-2);pointer-events:none;box-shadow:0 0 14px rgba(99,214,198,.5)}
-.cmp .knob{position:absolute;top:50%;left:var(--x,50%);width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font-family:var(--mono);font-size:15px;font-weight:500;pointer-events:none;box-shadow:0 6px 22px rgba(0,0,0,.5)}
-.cmp .tg{position:absolute;bottom:12px;font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;padding:5px 9px;background:rgba(5,6,7,.78);border-radius:4px;pointer-events:none;color:var(--ink)}
+.cmp .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;margin-left:-1px;background:var(--teal-2);pointer-events:none;box-shadow:0 0 14px rgba(99,214,198,.55)}
+.cmp .knob{position:absolute;top:50%;left:var(--x,50%);width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:var(--teal);color:var(--teal-ink);display:grid;place-items:center;font-family:var(--mono);font-size:16px;font-weight:500;pointer-events:none;box-shadow:0 6px 22px rgba(0,0,0,.5)}
+.cmp .tg{position:absolute;bottom:12px;font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;padding:5px 9px;background:rgba(5,6,7,.8);border-radius:4px;pointer-events:none;color:var(--ink)}
 .cmp .tg.l{left:12px}.cmp .tg.r{right:12px}
 .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize}
-.pair{display:grid;gap:34px;align-items:center}
-@media(min-width:900px){.pair{grid-template-columns:520px 1fr;gap:66px}.pair.flip{grid-template-columns:1fr 520px}.pair.flip .cmp{order:2}}
-
-/* timeline */
-.days{margin-top:34px}
-.day{padding:24px 0;border-top:1px solid var(--line)}
-.day:last-child{border-bottom:1px solid var(--line)}
-.day .d{font-family:var(--mono);font-size:12px;color:var(--teal);line-height:1.35;display:block;margin-bottom:10px}
-.day h3{font-size:22px;margin:0 0 7px}
-.day p{margin:0;color:var(--ink-2);font-weight:300;max-width:62ch}
-.day .thumb{margin-top:16px;width:150px;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
-.day .thumb img{aspect-ratio:4/5;object-fit:cover}
-@media(min-width:900px){.day{display:grid;grid-template-columns:140px 1fr 180px;gap:18px;align-items:start}.day .d{margin-bottom:0;padding-top:4px}.day .thumb{margin-top:0;width:180px}}
 
 /* prompt anatomy */
-.anat{display:grid;gap:18px;margin-top:30px}
-@media(min-width:960px){.anat{grid-template-columns:1.2fr 1fr;grid-template-areas:"p e" "p r";column-gap:46px;row-gap:18px;align-items:start}.anat .prompt{grid-area:p}.anat .explain{grid-area:e}.anat .res{grid-area:r}}
-.prompt{font-family:var(--mono);font-size:13.5px;line-height:1.95;background:var(--ground-2);border:1px solid var(--line);border-radius:14px;padding:20px}
+.anat{display:grid;gap:16px;margin-top:28px}
+@media(min-width:900px){.anat{grid-template-columns:1.15fr .85fr;grid-template-areas:"p e";column-gap:40px;align-items:start}.anat .prompt{grid-area:p}.anat .explain{grid-area:e}}
+.prompt{font-family:var(--mono);font-size:13px;line-height:2;background:var(--ground-2);border:1px solid var(--line);border-radius:14px;padding:18px}
 .prompt button{all:unset;cursor:pointer;border-radius:4px;padding:1px 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone;transition:background .15s,color .15s;color:var(--ink-2);border-bottom:2px solid var(--k,#555)}
 .prompt button[data-k="frame"]{--k:#6b7076}
 .prompt button[data-k="id"]{--k:var(--amber)}
@@ -108,316 +111,245 @@ section.blk{padding:76px 0;border-top:1px solid var(--line)}
 .prompt button[data-k="guard"]{--k:var(--teal)}
 .prompt button.on{background:var(--k);color:#0c0d0e;font-weight:500}
 .prompt button:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px}
-.explain{position:sticky;top:60px;z-index:3}
-@media(min-width:960px){.explain{top:24px}}
-.explain .card{background:var(--ground-3);border:1px solid var(--line-2);border-radius:16px;padding:18px 20px;min-height:148px;box-shadow:0 16px 34px rgba(0,0,0,.4)}
-.explain h4{margin:7px 0 9px;font-size:23px}
-.explain p{margin:0;color:var(--ink-2);font-weight:300;font-size:16px}
-.res{display:grid;grid-template-columns:116px 1fr;gap:15px;align-items:end}
-.res img{border-radius:4px;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--line)}
-.res small{font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.55}
+.explain{position:sticky;top:18px}
+.explain .card{background:var(--ground-3);border:1px solid var(--line-2);border-radius:16px;padding:18px 20px;box-shadow:0 16px 34px rgba(0,0,0,.4)}
+.explain h4{margin:7px 0 9px;font-size:22px}
+.explain p{margin:0;color:var(--ink-2);font-weight:300;font-size:15.5px}
+.explain .res{margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.explain .res img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.explain .res small{display:block;padding:9px 12px;font-family:var(--mono);font-size:10.5px;color:var(--mute);line-height:1.55;background:var(--ground-2)}
 
-/* library masonry */
-.lib{columns:2 160px;column-gap:10px;margin-top:32px}
-@media(min-width:900px){.lib{columns:4 230px;column-gap:14px}}
-.lib figure{margin:0 0 10px;break-inside:avoid;position:relative;cursor:zoom-in;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
-@media(min-width:900px){.lib figure{margin-bottom:14px}}
+/* library: big full-bleed mosaic */
+.libhead{padding:76px 0 0}
+.lib{columns:2 180px;column-gap:8px;margin-top:30px;padding:0 8px}
+@media(min-width:760px){.lib{columns:3 300px;column-gap:10px;padding:0 10px}}
+@media(min-width:1200px){.lib{columns:4 340px}}
+.lib figure{margin:0 0 8px;break-inside:avoid;position:relative;cursor:zoom-in;overflow:hidden;border-radius:3px}
+@media(min-width:760px){.lib figure{margin-bottom:10px}}
 .lib figure img{width:100%;height:auto;transition:transform .6s ease}
-.lib figure:hover img{transform:scale(1.03)}
+.lib figure:hover img{transform:scale(1.04)}
 .lib figure.crop img{aspect-ratio:1/1;object-fit:cover;object-position:center 20%}
-.lib figure.wide img{aspect-ratio:4/5;object-fit:cover}
-.lib figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 10px 9px;background:linear-gradient(transparent,rgba(5,6,7,.85));font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--ink);pointer-events:none}
-.lib .note{break-inside:avoid;margin:0 0 10px;padding:20px 17px;background:var(--ground-3);border:1px solid var(--teal);border-radius:4px}
-.lib .note p{margin:0;font-size:21px;line-height:1.22;color:var(--ink);font-weight:700;letter-spacing:-.01em}
-.lib .note small{display:block;margin-top:11px;font-family:var(--mono);font-size:10.5px;color:var(--teal-2);letter-spacing:.04em}
+.lib figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 11px 10px;background:linear-gradient(transparent,rgba(5,6,7,.8));font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink);opacity:0;transition:opacity .25s;pointer-events:none}
+.lib figure:hover figcaption{opacity:1}
+@media(hover:none){.lib figcaption{opacity:1}}
 
-/* who did what */
-.split{display:grid;gap:12px;margin-top:30px}
-@media(min-width:900px){.split{grid-template-columns:1.25fr 1fr 1fr;gap:14px}}
-.who{border:1px solid var(--line);border-radius:16px;padding:22px}
-.who.me{background:linear-gradient(170deg,var(--ground-3),var(--ground-2));border-color:var(--amber)}
-.who h3{font-size:25px;margin:8px 0 13px}
-.who ul{margin:0;padding:0;list-style:none}
-.who li{padding:10px 0;border-top:1px solid var(--line);color:var(--ink-2);font-size:15px;font-weight:300}
-.who.me li{color:var(--ink)}
-
-/* where it broke */
-.broke{display:grid;gap:0;margin-top:28px}
-.broke div{padding:18px 0;border-top:1px solid var(--line);display:grid;gap:5px}
-.broke b{font-weight:700;font-size:18px;color:var(--ink)}
-.broke span{color:var(--ink-2);font-weight:300}
-@media(min-width:900px){.broke{grid-template-columns:1fr 1fr;column-gap:52px}}
+/* two short columns: credits + honest */
+.cols{display:grid;gap:34px;padding:72px 0}
+@media(min-width:800px){.cols{grid-template-columns:1fr 1fr;gap:56px}}
+.cols h3{font-size:24px;margin:0 0 16px}
+.cols h3 .am{color:var(--amber-2)}
+.cols .row{padding:12px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink-2);font-weight:300}
+.cols .row b{color:var(--ink);font-weight:600;display:block;font-size:15.5px;margin-bottom:2px}
+.cols .row .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:5px}
 
 /* close */
-.close{padding:92px 0 118px;border-top:1px solid var(--line)}
-.close .h2{font-size:clamp(38px,7.5vw,82px)}
-.btn{display:inline-block;margin-top:24px;font-family:var(--mono);font-size:13px;letter-spacing:.05em;padding:14px 24px;border-radius:999px;background:var(--teal);color:var(--teal-ink);text-decoration:none;font-weight:500}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line-2);margin-left:8px}
-.disc{margin-top:40px;font-family:var(--mono);font-size:11.5px;color:var(--mute);max-width:72ch;line-height:1.75}
-footer{padding:28px 0 76px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.close{padding:86px 0 110px;text-align:center}
+.close h2{font-size:clamp(34px,6.5vw,66px);font-weight:900}
+.close h2 .am{color:var(--amber-2)}
+.close p{max-width:52ch;margin:22px auto 0;color:var(--ink-2);font-weight:300;font-size:18px}
+.btn{display:inline-block;margin-top:26px;font-family:var(--mono);font-size:13px;letter-spacing:.05em;padding:14px 26px;border-radius:999px;background:var(--teal);color:var(--teal-ink);text-decoration:none;font-weight:500}
+.disc{margin-top:40px;font-family:var(--mono);font-size:11px;color:var(--mute);line-height:1.8;max-width:64ch;margin-left:auto;margin-right:auto}
+footer{padding:26px 0 78px;font-family:var(--mono);font-size:11px;color:var(--mute);text-align:center}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:60;background:rgba(6,7,8,.95);display:none;align-items:center;justify-content:center;padding:20px;flex-direction:column;gap:12px}
 .lb.on{display:flex}
-.lb img{max-height:82vh;max-width:100%;border-radius:4px}
+.lb img{max-height:84vh;max-width:100%;border-radius:4px}
 .lb p{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin:0;text-align:center}
 .lb button{all:unset;position:absolute;top:14px;right:16px;font-family:var(--mono);font-size:13px;color:var(--ink);padding:8px 13px;border:1px solid var(--line-2);border-radius:999px;cursor:pointer}
 
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
 <a class="home" href="../">&larr; the closet</a>
 
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div class="frame">
-      <img src="selfie.jpg" alt="The original phone selfie: Mot in a gray henley in his living room" fetchpriority="high">
-      <div class="frame-tag"><span>The only real photo here</span><span>Apr 5 2026</span></div>
-    </div>
-    <div>
-      <div class="lab">From the closet &middot; the hand mirror</div>
-      <h1>One selfie.<br><span class="am">A wardrobe</span><br>I don't own.</h1>
-      <p class="lede">I took that picture in my living room. Five weeks later I used it, and nothing else, to build a full editorial library of myself in places I have never stood.</p>
-      <div class="facts">
-        <span><b>1</b> source photo</span>
-        <span>May 5 to May 16</span>
-        <span><b>Claude</b> planned and prompted</span>
-        <span><b>Grok</b> made the pictures</span>
-        <span>no camera, no studio</span>
-      </div>
-    </div>
+<!-- HERO -->
+<header class="hero bleed">
+  <div class="bg" style="background-image:url('selfie.jpg')"></div>
+  <div class="scrim"></div>
+  <div class="inner">
+    <div class="eyebrow">From the closet &middot; the hand mirror</div>
+    <h1>One selfie.<br>A wardrobe<br><span class="am">I don't own.</span></h1>
+    <div class="tag">The only real photo here &middot; Apr 5 2026</div>
   </div>
+  <div class="cue">scroll</div>
 </header>
 
-<section class="blk">
-  <div class="wrap pair">
-    <div class="cmp" style="--x:50%" data-cmp>
-      <img src="relight.jpg" alt="First AI generation, same gray shirt, studio light">
-      <img class="top" src="selfie.jpg" alt="Original selfie">
-      <div class="bar"></div><div class="knob">&harr;</div>
-      <span class="tg l">Phone</span><span class="tg r">First pass</span>
-      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the original selfie and the first generation">
-    </div>
-    <div>
-      <div class="lab">The first test</div>
-      <h2 class="h2">Same shirt. <span class="am">Different room.</span></h2>
-      <div class="copy">
-        <p>Before I asked it to change anything, I asked it to change nothing. Same face, same gray henley, same smile. Just move me into a studio with a dark backdrop and real light.</p>
-        <p>Drag the handle. If that one did not hold, nothing after it would. It held well enough to keep going.</p>
-      </div>
-    </div>
+<!-- INTRO -->
+<div class="say"><div class="hold">
+  <p>I took that picture in my living room. Five weeks later I used it, and <span class="am">nothing else,</span> to build a full library of myself in places I have never stood.</p>
+  <div class="facts">
+    <span><b>1</b> source photo</span>
+    <span>May 5 to 16</span>
+    <span><b>Claude</b> planned + prompted</span>
+    <span><b>Grok</b> made the pictures</span>
+    <span>no camera, no studio</span>
   </div>
+</div></div>
+
+<!-- FIRST TEST -->
+<div class="overline"><div class="hold">
+  <div class="lab">The first test</div>
+  <h2>Before I changed anything, <span class="am">I changed nothing.</span></h2>
+  <p>Same face, same gray shirt, same smile. Just move me into a studio. Drag the handle. If this did not hold, nothing after it would.</p>
+</div></div>
+<div class="cmpwrap">
+  <div class="cmp" style="--x:50%" data-cmp>
+    <img src="relight.jpg" alt="First AI generation, same gray shirt, studio light">
+    <img class="top" src="selfie.jpg" alt="Original selfie">
+    <div class="bar"></div><div class="knob">&harr;</div>
+    <span class="tg l">Phone</span><span class="tg r">First pass</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Compare the selfie and the first generation">
+  </div>
+</div>
+
+<!-- HOW IT WENT: image-led bands -->
+<div class="overline"><div class="hold">
+  <div class="lab a">How it went</div>
+  <h2>Eleven days, two tools, <span class="am">a lot of no.</span></h2>
+</div></div>
+
+<section class="band bleed">
+  <div class="bg" style="background-image:url('early-triple.jpg')"></div>
+  <img class="fg" src="early-triple.jpg" alt="Early three-panel test showing identity drift">
+  <div class="cap"><span class="d">May 5 &middot; the drift</span><p class="t">Three slightly different guys who all <span class="am">kind of</span> looked like me.</p></div>
 </section>
 
-<section class="blk">
-  <div class="wrap">
-    <div class="lab a">How it actually went</div>
-    <h2 class="h2">Eleven days, two tools, <span class="am">a lot of no.</span></h2>
-    <div class="copy"><p>None of this was one magic prompt. It was a back and forth between me, Claude, and Grok, and most of the work was deciding what was wrong with a picture and how to say so.</p></div>
-    <div class="days">
-      <div class="day">
-        <div class="d">Apr 5</div>
-        <div><h3>The selfie</h3><p>Phone camera, living room, window light. Not taken for this. It was just the clearest picture of my face I had.</p></div>
-        <div class="thumb"><img src="selfie.jpg" alt="" loading="lazy"></div>
-      </div>
-      <div class="day">
-        <div class="d">May 5</div>
-        <div><h3>First tests, and the drift</h3><p>Early outputs came back as three slightly different guys who all kind of looked like me. Hair texture, face width, and the glasses kept wandering. That is the core problem with this whole idea, and I saw it on day one.</p></div>
-        <div class="thumb"><img src="early-triple.jpg" alt="Early three-panel test showing identity drift" loading="lazy"></div>
-      </div>
-      <div class="day">
-        <div class="d">May 6 to 12</div>
-        <div><h3>Writing the description of me</h3><p>Claude and I built a written anchor: height, build, hair, frames, skin, coloring. It goes into every single prompt, word for word. Short prompts drifted. Long, boring, repetitive ones held.</p></div>
-        <div class="thumb"><img src="studio-green.jpg" alt="" loading="lazy"></div>
-      </div>
-      <div class="day">
-        <div class="d">May 13</div>
-        <div><h3>The big batch</h3><p>Formal, smart casual, outdoor, lifestyle. Tux, linen suit, a rooftop, a coastline, an autumn park. Run, look, critique, rewrite, run again.</p></div>
-        <div class="thumb"><img src="shore.jpg" alt="" loading="lazy"></div>
-      </div>
-      <div class="day">
-        <div class="d">May 16</div>
-        <div><h3>Home</h3><p>The last gap was ordinary life. A kitchen in the morning. Coffee across from someone who is not in the frame. These ended up being my favorites.</p></div>
-        <div class="thumb"><img src="kitchen.jpg" alt="" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
+<section class="band bleed">
+  <div class="bg" style="background-image:url('studio-green.jpg')"></div>
+  <img class="fg" src="studio-green.jpg" alt="Studio portrait, green henley">
+  <div class="cap"><span class="d">May 6 to 12 &middot; the anchor</span><p class="t">I wrote a description of myself and put it in <span class="am">every prompt,</span> word for word.</p></div>
 </section>
 
-<section class="blk">
-  <div class="wrap">
-    <div class="lab">Anatomy of a prompt</div>
-    <h2 class="h2">Tap a piece. <span class="am">Here is why it is there.</span></h2>
-    <div class="copy"><p>This is the real prompt behind the kitchen shot. Every image in the library has the same skeleton.</p></div>
-    <div class="anat">
-      <div class="explain"><div class="card" id="explain" aria-live="polite">
-        <div class="lab" id="ex-lab">Start anywhere</div>
-        <h4 id="ex-h">Eight jobs, one paragraph</h4>
-        <p id="ex-p">Each underlined chunk does one job. Tap one and this card explains it. The colors are only there so you can tell them apart.</p>
-      </div></div>
-      <div class="prompt" id="prompt">
-        <button data-k="frame">Photorealistic RAW full body photograph, warm lifestyle editorial,</button>
-        <button data-k="id">man late 30s, 6 feet 3 inches tall broadly built large frame 235 pounds slightly heavyset but proportionate for frame, tall broad proportional male physique, long wavy auburn-brown hair with warm amber highlights, rectangular black glasses, light stubble, fair warm-toned skin,</button>
-        <button data-k="ward">wearing simple warm ivory henley and dark wash straight leg jeans,</button>
-        <button data-k="act">standing in a warm well lived kitchen leaning against counter holding a ceramic coffee mug, relaxed natural morning expression easy smile, full figure visible head to toe correctly proportioned,</button>
-        <button data-k="light">soft warm morning window light from left, warm kitchen interior wood tones softly blurred background,</button>
-        <button data-k="cam">shot on Canon 5D 35mm f/2.0,</button>
-        <button data-k="grade">warm golden morning color grading, avoid cool blue or gray tones, rich warm skin tones, warm amber highlights in hair, Kodak Portra 400 film emulation,</button>
-        <button data-k="guard">hyperrealistic skin and fabric texture, maintain exact facial structure and features, face ID consistency</button>
-      </div>
-      <div class="res">
-        <img src="kitchen.jpg" alt="The resulting kitchen image" loading="lazy">
-        <small>The result. Grok gave me a tan henley and boots instead of ivory and bare feet. It was a better picture, so I kept it.</small>
-      </div>
-    </div>
-  </div>
+<section class="band bleed">
+  <div class="bg" style="background-image:url('shore.jpg')"></div>
+  <img class="fg" src="shore.jpg" alt="Coastline, golden hour">
+  <div class="cap"><span class="d">May 13 &middot; the big batch</span><p class="t">Formal, casual, outdoor, lifestyle. Run, look, <span class="am">critique,</span> run again.</p></div>
 </section>
 
-<section class="blk">
-  <div class="wrap pair flip">
-    <div class="cmp" style="--x:50%" data-cmp>
-      <img src="camel-headshot.jpg" alt="After: camel blazer, warm palette">
-      <img class="top" src="navy.jpg" alt="Before: navy blazer, cool palette">
-      <div class="bar"></div><div class="knob">&harr;</div>
-      <span class="tg l">Navy</span><span class="tg r">Camel</span>
-      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare navy blazer and camel blazer versions">
-    </div>
-    <div>
-      <div class="lab a">What I changed, part one</div>
-      <h2 class="h2">I had my colors done. <span class="am">So I used them.</span></h2>
-      <div class="copy">
-        <p>I am a True Spring. Warm, clear, golden. Navy, black, charcoal, and burgundy all fight my skin, and the first batch was full of them.</p>
-        <p>So the palette became a rule: camel, rust, olive, coral, cream, cognac. Warm light only. Kodak Portra on everything. That one change is most of why the library looks like it belongs together.</p>
-      </div>
-    </div>
-  </div>
+<section class="band bleed">
+  <div class="bg" style="background-image:url('kitchen.jpg')"></div>
+  <img class="fg" src="kitchen.jpg" alt="Kitchen, morning light">
+  <div class="cap"><span class="d">May 16 &middot; home</span><p class="t">A kitchen in the morning. These ended up <span class="am">my favorites.</span></p></div>
 </section>
 
-<section class="blk">
-  <div class="wrap pair">
-    <div class="cmp" style="--x:50%" data-cmp>
-      <img src="coral-door.jpg" alt="After: standing in a doorway, accurate build">
-      <img class="top" src="coral-scrunched.jpg" alt="Before: seated and scrunched">
-      <div class="bar"></div><div class="knob">&harr;</div>
-      <span class="tg l">Before</span><span class="tg r">After</span>
-      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare the scrunched and corrected versions">
+<!-- PROMPT ANATOMY -->
+<div class="overline"><div class="hold">
+  <div class="lab">Anatomy of a prompt</div>
+  <h2>One prompt, eight jobs. <span class="am">Tap a piece.</span></h2>
+</div></div>
+<div class="hold" style="max-width:1100px;padding-bottom:20px">
+  <div class="anat">
+    <div class="prompt" id="prompt">
+      <button data-k="frame">Photorealistic RAW full body photograph, warm lifestyle editorial,</button>
+      <button data-k="id">man late 30s, 6 feet 3 inches tall broadly built large frame 235 pounds slightly heavyset but proportionate for frame, long wavy auburn-brown hair with warm amber highlights, rectangular black glasses, light stubble, fair warm-toned skin,</button>
+      <button data-k="ward">wearing simple warm ivory henley and dark wash straight leg jeans,</button>
+      <button data-k="act">standing in a warm well lived kitchen leaning against counter holding a ceramic coffee mug, relaxed natural morning expression easy smile, full figure visible head to toe correctly proportioned,</button>
+      <button data-k="light">soft warm morning window light from left, warm kitchen interior softly blurred background,</button>
+      <button data-k="cam">shot on Canon 5D 35mm f/2.0,</button>
+      <button data-k="grade">warm golden morning color grading, avoid cool blue or gray tones, Kodak Portra 400 film emulation,</button>
+      <button data-k="guard">maintain exact facial structure and features, face ID consistency</button>
     </div>
-    <div>
-      <div class="lab a">What I changed, part two</div>
-      <h2 class="h2">It kept making me <span class="am">smaller.</span></h2>
-      <div class="copy">
-        <p>I am 6 foot 3 and about 235. Left alone, the model either squashed me into a chair or handed me a gym body I do not have. Both were wrong, and both were obvious to anyone who knows me.</p>
-        <p>The fix was saying it plainly: <strong>"slightly heavyset but proportionate for frame."</strong> Standing poses, real numbers, no flattery. That line fixed it, and it has been in every prompt since.</p>
-      </div>
-    </div>
+    <div class="explain"><div class="card" id="explain" aria-live="polite">
+      <div class="lab" id="ex-lab">Start anywhere</div>
+      <h4 id="ex-h">Eight jobs, one paragraph</h4>
+      <p id="ex-p">Each underlined chunk does one job. Tap one. The colors are only there to tell them apart.</p>
+      <div class="res"><img src="kitchen.jpg" alt="The resulting kitchen image"><small>The result. Grok gave me a tan henley instead of ivory. Better picture, so I kept it.</small></div>
+    </div></div>
   </div>
-</section>
+</div>
 
-<section class="blk">
-  <div class="wrap">
-    <div class="lab">The library</div>
-    <h2 class="h2">What came out <span class="am">the other side.</span></h2>
-    <div class="copy"><p>A selection, not everything. Tap any frame to see it big. Every person in these pictures is generated.</p></div>
-    <div class="lib" id="lib">
-      <figure><img src="tux.jpg" alt="" loading="lazy"><figcaption>Black tie, velvet drape</figcaption></figure>
-      <figure class="crop"><img src="two-cups.jpg" alt="" loading="lazy"><figcaption>Two cups</figcaption></figure>
-      <figure><img src="shore.jpg" alt="" loading="lazy"><figcaption>Coastline, golden hour</figcaption></figure>
-      <div class="note"><p>None of these places exist. Neither do any of these clothes.</p><small>All generated &middot; May 2026</small></div>
-      <figure><img src="kitchen.jpg" alt="" loading="lazy"><figcaption>Kitchen, morning</figcaption></figure>
-      <figure class="crop"><img src="moody.jpg" alt="" loading="lazy"><figcaption>Moody, single key light</figcaption></figure>
-      <figure><img src="rooftop.jpg" alt="" loading="lazy"><figcaption>Rooftop, sunset</figcaption></figure>
-      <figure class="wide"><img src="overcoat.jpg" alt="" loading="lazy"><figcaption>Camel overcoat, street</figcaption></figure>
-      <figure><img src="tan-suit.jpg" alt="" loading="lazy"><figcaption>Linen suit, studio</figcaption></figure>
-      <figure class="crop"><img src="autumn-glasses.jpg" alt="" loading="lazy"><figcaption>Autumn, glasses adjust</figcaption></figure>
-      <figure><img src="leather-wall.jpg" alt="" loading="lazy"><figcaption>Cognac leather, sandstone</figcaption></figure>
-      <figure class="wide"><img src="cafe.jpg" alt="" loading="lazy"><figcaption>Coffee shop</figcaption></figure>
-      <figure><img src="autumn-walk.jpg" alt="" loading="lazy"><figcaption>Autumn park, walking</figcaption></figure>
-      <figure class="crop"><img src="terracotta.jpg" alt="" loading="lazy"><figcaption>Terracotta sport coat</figcaption></figure>
-      <figure><img src="coral-door.jpg" alt="" loading="lazy"><figcaption>Coral henley, doorway</figcaption></figure>
-      <figure class="crop"><img src="shore-close.jpg" alt="" loading="lazy"><figcaption>Coastline, close</figcaption></figure>
-      <figure><img src="leather-walk.jpg" alt="" loading="lazy"><figcaption>Leather, mid-stride</figcaption></figure>
-      <figure class="crop"><img src="tux-close.jpg" alt="" loading="lazy"><figcaption>Black tie, close</figcaption></figure>
-      <figure class="wide"><img src="woods-close.jpg" alt="" loading="lazy"><figcaption>Woods, late afternoon</figcaption></figure>
-      <figure class="crop"><img src="olive.jpg" alt="" loading="lazy"><figcaption>Olive sport coat</figcaption></figure>
-      <figure class="crop"><img src="rooftop-close.jpg" alt="" loading="lazy"><figcaption>Rooftop, close</figcaption></figure>
-      <figure class="crop"><img src="park-close.jpg" alt="" loading="lazy"><figcaption>City park, close</figcaption></figure>
-    </div>
+<!-- TWO FIXES -->
+<div class="overline"><div class="hold">
+  <div class="lab a">What I changed</div>
+  <h2>I had my colors done. <span class="am">So I used them.</span></h2>
+  <p>I am a True Spring, so navy and charcoal fight my skin. The palette became a rule: camel, rust, olive, cream, cognac. Warm light only.</p>
+</div></div>
+<div class="cmpwrap">
+  <div class="cmp" style="--x:50%" data-cmp>
+    <img src="camel-headshot.jpg" alt="After: camel blazer, warm palette">
+    <img class="top" src="navy.jpg" alt="Before: navy blazer, cool palette">
+    <div class="bar"></div><div class="knob">&harr;</div>
+    <span class="tg l">Navy</span><span class="tg r">Camel</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Compare navy and camel versions">
   </div>
-</section>
+</div>
 
-<section class="blk">
-  <div class="wrap">
-    <div class="lab a">Who did what</div>
-    <h2 class="h2">The tools did not <span class="am">pick the pictures.</span></h2>
-    <div class="split">
-      <div class="who me">
-        <div class="lab a">Me</div>
-        <h3>Taste, and the word no</h3>
-        <ul>
-          <li>Decided what the library was for and what was missing from it</li>
-          <li>Threw out anything that did not look like me, or looked like a better-looking stranger</li>
-          <li>Brought the color season, the real height and weight, and a photographer's eye for light</li>
-          <li>Picked every frame here out of a much bigger pile</li>
-        </ul>
-      </div>
-      <div class="who">
-        <div class="lab">Claude</div>
-        <h3>The thinking partner</h3>
-        <ul>
-          <li>Turned my notes into the written description of me</li>
-          <li>Wrote and rewrote the prompts, fully self-contained</li>
-          <li>Critiqued each batch with me and named what was off</li>
-          <li>Built this page</li>
-        </ul>
-      </div>
-      <div class="who">
-        <div class="lab">Grok</div>
-        <h3>The camera</h3>
-        <ul>
-          <li>Generated every image from the selfie plus a prompt</li>
-          <li>Got it right sometimes, wrong a lot, now and then better than I asked</li>
-        </ul>
-      </div>
-    </div>
+<div class="overline"><div class="hold">
+  <h2 style="margin-top:8px">It kept making me <span class="am">smaller.</span></h2>
+  <p>I am 6 foot 3 and about 235. Left alone it squashed me into a chair or gave me a gym body. The line that fixed it: "slightly heavyset but proportionate for frame."</p>
+</div></div>
+<div class="cmpwrap">
+  <div class="cmp" style="--x:50%" data-cmp>
+    <img src="coral-door.jpg" alt="After: standing in a doorway, accurate build">
+    <img class="top" src="coral-scrunched.jpg" alt="Before: seated and scrunched">
+    <div class="bar"></div><div class="knob">&harr;</div>
+    <span class="tg l">Before</span><span class="tg r">After</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Compare the scrunched and corrected versions">
   </div>
-</section>
+</div>
 
-<section class="blk">
-  <div class="wrap">
-    <div class="lab">Where it broke</div>
-    <h2 class="h2">The honest <span class="am">part.</span></h2>
-    <div class="broke">
-      <div><b>Face drift</b><span>Even with the anchor, some frames come back as a cousin. Those got thrown out, and there were plenty.</span></div>
-      <div><b>Glasses</b><span>Lens reflections and frame shapes are hard. Check the glasses first in any AI portrait and you will see it.</span></div>
-      <div><b>Hands</b><span>Still the giveaway. Hands in pockets and hands around mugs were part styling choice, part dodge.</span></div>
-      <div><b>It is always autumn</b><span>Warm light and fall leaves suit my coloring, so the library leans hard on golden hour. Spring and summer are next.</span></div>
-      <div><b>Only one face tested</b><span>Everything here is me. I have not run this on a different face, skin, or coloring yet, and I will not call it a service until I have.</span></div>
-      <div><b>Not unique anymore</b><span>Apps now do selfie to headshot for about $30. What they do not do is art direction: a palette, a story, someone saying no. That is the part worth anything.</span></div>
-    </div>
+<!-- LIBRARY -->
+<div class="libhead"><div class="hold">
+  <div class="lab">The library</div>
+  <h2 style="font-size:clamp(32px,5.5vw,56px);margin-top:12px">What came out <span class="am">the other side.</span></h2>
+  <p style="color:var(--ink-2);font-weight:300;margin-top:14px">Tap any frame to see it big. Every person here is generated.</p>
+</div></div>
+<div class="lib bleed" id="lib">
+  <figure><img src="tan-suit.jpg" alt="" loading="lazy"><figcaption>Linen suit, studio</figcaption></figure>
+  <figure><img src="shore.jpg" alt="" loading="lazy"><figcaption>Coastline, golden hour</figcaption></figure>
+  <figure class="crop"><img src="two-cups.jpg" alt="" loading="lazy"><figcaption>Two cups</figcaption></figure>
+  <figure><img src="tux.jpg" alt="" loading="lazy"><figcaption>Black tie, velvet drape</figcaption></figure>
+  <figure><img src="rooftop.jpg" alt="" loading="lazy"><figcaption>Rooftop, sunset</figcaption></figure>
+  <figure class="crop"><img src="moody.jpg" alt="" loading="lazy"><figcaption>Single key light</figcaption></figure>
+  <figure><img src="overcoat.jpg" alt="" loading="lazy"><figcaption>Camel overcoat, street</figcaption></figure>
+  <figure><img src="kitchen.jpg" alt="" loading="lazy"><figcaption>Kitchen, morning</figcaption></figure>
+  <figure class="crop"><img src="autumn-glasses.jpg" alt="" loading="lazy"><figcaption>Autumn, glasses</figcaption></figure>
+  <figure><img src="leather-wall.jpg" alt="" loading="lazy"><figcaption>Cognac leather</figcaption></figure>
+  <figure><img src="cafe.jpg" alt="" loading="lazy"><figcaption>Coffee shop</figcaption></figure>
+  <figure class="crop"><img src="terracotta.jpg" alt="" loading="lazy"><figcaption>Terracotta coat</figcaption></figure>
+  <figure><img src="autumn-walk.jpg" alt="" loading="lazy"><figcaption>Autumn park</figcaption></figure>
+  <figure><img src="coral-door.jpg" alt="" loading="lazy"><figcaption>Coral henley, doorway</figcaption></figure>
+  <figure class="crop"><img src="shore-close.jpg" alt="" loading="lazy"><figcaption>Coastline, close</figcaption></figure>
+  <figure><img src="leather-walk.jpg" alt="" loading="lazy"><figcaption>Leather, mid-stride</figcaption></figure>
+  <figure class="crop"><img src="tux-close.jpg" alt="" loading="lazy"><figcaption>Black tie, close</figcaption></figure>
+  <figure><img src="woods-close.jpg" alt="" loading="lazy"><figcaption>Woods, late light</figcaption></figure>
+  <figure class="crop"><img src="olive.jpg" alt="" loading="lazy"><figcaption>Olive coat</figcaption></figure>
+  <figure class="crop"><img src="rooftop-close.jpg" alt="" loading="lazy"><figcaption>Rooftop, close</figcaption></figure>
+</div>
+
+<!-- CREDITS + HONEST -->
+<div class="hold"><div class="cols">
+  <div>
+    <h3>Who did <span class="am">what</span></h3>
+    <div class="row"><span class="who">Me</span><b>Taste, and the word no</b>Set what the library was for, threw out anything that looked like a better-looking stranger, picked every frame here from a much bigger pile.</div>
+    <div class="row"><span class="who">Claude</span><b>The thinking partner</b>Wrote the description of me, drafted and rewrote the prompts, critiqued each batch, built this page.</div>
+    <div class="row"><span class="who">Grok</span><b>The camera</b>Made every image from the selfie plus a prompt. Right sometimes, wrong a lot, now and then better than I asked.</div>
   </div>
-</section>
-
-<section class="close">
-  <div class="wrap">
-    <div class="lab a">So what is this</div>
-    <h2 class="h2">An experiment that <span class="am">taught me to direct.</span></h2>
-    <div class="copy">
-      <p>I am a photographer and video person by trade, and I started this out of plain curiosity. What I walked away with is a working method for art-directing AI imagery the way I would direct a real shoot: light, palette, wardrobe, story, and a lot of retakes.</p>
-      <p>If you need lifestyle imagery of a real person and a studio day is not realistic, or you just want to see how this works up close, I would like to hear about it.</p>
-    </div>
-    <a class="btn" href="../">Get in touch</a><a class="btn ghost" href="#prompt">See the prompt again</a>
-    <p class="disc">Disclosure: every image on this page except the first is AI-generated from one photograph of me, with my consent, because it is me. Pictures were made in Grok. The planning, the prompts, and this page were made with Claude. Anything I make for someone else gets labeled as AI-generated, and starts with their consent too.</p>
+  <div>
+    <h3>Where it <span class="am">broke</span></h3>
+    <div class="row"><b>Face drift</b>Even with the anchor, some frames come back as a cousin. Those got cut.</div>
+    <div class="row"><b>Glasses and hands</b>The usual giveaways. Check the glasses first in any AI portrait.</div>
+    <div class="row"><b>It is always autumn</b>Warm light suits my coloring, so it leans hard on golden hour. Spring and summer are next.</div>
+    <div class="row"><b>One face tested</b>Everything here is me. Not a service until I have run it on someone else.</div>
   </div>
-</section>
+</div></div>
 
-<footer><div class="wrap" style="display:flex;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto">
-  <span>Mot Buchanan &middot; The Hand Mirror</span><span>v2.1 &middot; Oct 1 2026</span>
-</div></footer>
+<!-- CLOSE -->
+<section class="close"><div class="hold">
+  <div class="lab a">So what is this</div>
+  <h2 style="margin-top:14px">An experiment that <span class="am">taught me to direct.</span></h2>
+  <p>I am a photographer and video person by trade. What I walked away with is a way to art-direct AI imagery like a real shoot: light, palette, wardrobe, story, and a lot of retakes.</p>
+  <a class="btn" href="../">Get in touch</a>
+  <p class="disc">Every image here except the first is AI-generated from one photograph of me, with my consent, because it is me. Pictures made in Grok. Planning, prompts, and this page made with Claude. Anything I make for someone else is labeled as AI-generated and starts with their consent too.</p>
+</div></section>
 
-<button class="mb-ver" id="ver">v2.1</button>
-<div class="toast" id="toast">v2.1 loaded &middot; Oct 1 2026</div>
+<footer>Mot Buchanan &middot; The Hand Mirror &middot; v3.0 &middot; Oct 1 2026</footer>
+
+<button class="mb-ver" id="ver">v3.0</button>
+<div class="toast" id="toast">v3.0 loaded &middot; Oct 1 2026</div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button id="lbx">close</button>
@@ -433,14 +365,14 @@ footer{padding:28px 0 76px;border-top:1px solid var(--line);font-family:var(--mo
   });
 
   var info = {
-    frame:['Frame','Tell it what kind of picture this is','"Photorealistic RAW" pushes away from the glossy AI look. "Full body" and "lifestyle editorial" set the crop and the mood before anything else.'],
-    id:['Identity anchor','The description of me','The same words in every prompt, never paraphrased. The height and the "slightly heavyset but proportionate" line exist because without them it kept shrinking me or making me a gym guy.'],
-    ward:['Wardrobe','Clothes, in my colors','Only warm True Spring colors. Notice Grok ignored "ivory" and went tan anyway. Sometimes the model is a co-author.'],
-    act:['Action and pose','Give the body a job','Leaning on a counter holding a mug looks natural. "Correctly proportioned" and "head to toe" stop it cropping my feet or stretching my legs.'],
-    light:['Light','Where the sun is','Direction matters. "From left" gives the face shape and keeps the light consistent across a whole set. This is where being a photographer actually helps.'],
-    cam:['Camera','A lens it understands','Naming a real body and focal length is shorthand for depth of field and perspective. 35mm for rooms, 85mm for faces.'],
-    grade:['Color grade','The look of the whole library','Warm golden grading plus Portra 400 film emulation, on every image. The "avoid cool blue or gray" line is there because it drifts cold without it.'],
-    guard:['Guardrails','Keep the face','Texture and face-consistency phrases at the end. They do not guarantee anything, but frames drifted more without them.']
+    frame:['Frame','What kind of picture','"Photorealistic RAW" pushes away from the glossy AI look. "Full body" and "lifestyle editorial" set the crop and mood first.'],
+    id:['Identity anchor','The description of me','The same words in every prompt, never paraphrased. The height and the "slightly heavyset but proportionate" line keep it from shrinking me or handing me a gym body.'],
+    ward:['Wardrobe','Clothes, in my colors','Only warm True Spring colors. Grok ignored "ivory" and went tan anyway. Sometimes the model is a co-author.'],
+    act:['Action and pose','Give the body a job','Leaning on a counter with a mug reads natural. "Head to toe, correctly proportioned" stops it cropping my feet or stretching my legs.'],
+    light:['Light','Where the sun is','Direction matters. "From left" shapes the face and keeps a whole set consistent. This is where being a photographer helps.'],
+    cam:['Camera','A lens it knows','A real body and focal length is shorthand for depth of field and perspective. 35mm for rooms, 85mm for faces.'],
+    grade:['Color grade','The look of the set','Warm golden grading plus Portra 400 on every frame. "Avoid cool blue or gray" is there because it drifts cold without it.'],
+    guard:['Guardrails','Keep the face','Face-consistency phrases at the end. No guarantee, but frames drifted more without them.']
   };
   var btns = document.querySelectorAll('#prompt button');
   btns.forEach(function(b){
